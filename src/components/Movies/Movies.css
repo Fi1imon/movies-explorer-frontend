@@ -1,0 +1,39 @@
+.movies {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1140px;
+  display: flex;
+  flex-direction: column;
+}
+
+.movies__more-button {
+  margin: 50px auto 80px;
+  padding: 0;
+  min-width: 320px;
+  min-height: 36px;
+  background: #202020;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0;
+  text-align: center;
+  border: 1px solid #424242;
+  border-radius: 6px;
+  transition: opacity .2s linear;
+}
+
+.movies__more-button:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
+@media screen and (max-width: 1200px) {
+  .movies {
+    max-width: calc(100% - 60px);
+  }
+
+  .movies__more-button {
+    margin-top: 62px;
+  }
+}

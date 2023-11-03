@@ -1,0 +1,7 @@
+.more-movies {
+  max-width: 100%;
+  min-height: 140px;
+  max-height: 166px;
+  display: flex;
+  justify-content: center;
+}
