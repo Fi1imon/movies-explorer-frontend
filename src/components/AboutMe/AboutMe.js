@@ -1,4 +1,4 @@
-import studentPhoto from '../../images/studentPhoto.jpg'
+import studentPhoto from '../../images/studentPhoto.png'
 
 const AboutMe = () => {
   return (
@@ -13,9 +13,9 @@ const AboutMe = () => {
           «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл
           с постоянной работы.
         </p>
-        <a className="about-me__link" href="https://github.com/Fi1imon" target="_blank">GitHub</a>
+        <a className="about-me__link" href="https://github.com/Fi1imon" target="_blank" rel="noreferrer">GitHub</a>
       </div>
-      <img className="about-me__photo" src={studentPhoto} alt="student photo"/>
+      <img className="about-me__photo" src={studentPhoto} alt="student"/>
     </div>
   )
 }

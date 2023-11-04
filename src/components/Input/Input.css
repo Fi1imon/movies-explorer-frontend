@@ -32,7 +32,14 @@
   border-radius: 8px;
 }
 
+.input__input:focus {
+  box-sizing: border-box;
+  outline: 1px solid #3456F3;
+}
+
 .input__input_invalid {
+  box-sizing: border-box;
+  outline: 1px solid #ee3465;
   color: #ee3465;
 }
 
@@ -45,4 +52,10 @@
   line-height: 12px;
   letter-spacing: 0;
   text-align: left;
+}
+
+@media screen and (max-width: 450px) {
+  .input {
+    grid-template-columns: 260px;
+  }
 }

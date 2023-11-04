@@ -98,10 +98,12 @@
     max-width: 480px;
     grid-template-columns: minmax(min-content, 360px) 1fr 52px;
     grid-template-rows: 190px 16px;
-    grid-row-gap: 14px;
+    grid-row-gap: 25px;
   }
 
   .movie-card__duration {
+    max-height: none;
+    min-height: 18px;
     grid-column: 3 / 4;
   }
 
@@ -111,5 +113,23 @@
     text-overflow: ellipsis;
     max-width: 250px;
     grid-column: 1 / 2;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .movie-card {
+    max-width: 360px;
+    grid-template-columns: minmax(min-content, 240px) 1fr 52px;
+    grid-template-rows: 168px 15px;
+    grid-row-gap: 16px;
+  }
+
+  .movie-card_title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 240px;
+    font-size: 12px;
+    line-height: 15px;
   }
 }

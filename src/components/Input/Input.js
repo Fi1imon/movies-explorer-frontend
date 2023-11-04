@@ -9,7 +9,7 @@ const Input = ({
       <input
         type={type}
         id={id}
-        className={`input__input ${isValid ? '' : errorClassName}`}
+        className={`input__input ${isValid ? '' : errorClassName} ${error ? 'input__input_invalid' : ''}`}
         name={name}
         placeholder={placeholder}
         minLength={minLength}

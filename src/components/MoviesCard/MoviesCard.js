@@ -20,11 +20,11 @@ const MoviesCard = ({ movieImage, movieName, movieDuration, movieOwner }) => {
   return (
     <figure className="movie-card"  onMouseEnter={() => setIsMouseOver(true)} onMouseLeave={() => setIsMouseOver(false)}>
       {isMoviesPage() ? <Button
-        className={`movie-card__save-button ${isMouseOver || window.innerWidth < 1279 ? "movie-card__save-button_visible" : ""} ${isMovieOwner ? "movie-card__save-button_saved" : ""}`}
+        className={`movie-card__save-button ${isMouseOver || window.innerWidth < 1138 ? "movie-card__save-button_visible" : ""} ${isMovieOwner ? "movie-card__save-button_saved" : ""}`}
         buttonText={`${isMovieOwner ? "" : "Сохранить"}`}
         buttonType="button"
       /> : <Button
-        className={`movie-card__save-button movie-card__save-button_delete ${isMouseOver || window.innerWidth < 1279 ? "movie-card__save-button_visible" : ""} `}
+        className={`movie-card__save-button movie-card__save-button_delete ${isMouseOver || window.innerWidth < 1138 ? "movie-card__save-button_visible" : ""} `}
         buttonType="button"
       />}
       <img className="movie-card__image" src={movieImage} alt="movie"/>

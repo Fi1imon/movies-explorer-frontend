@@ -15,12 +15,30 @@ import NotFound from "../NotFound/NotFound";
 import { movies, savedMovies } from "../../utils/constants";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [moviesList, setMoviesList] = useState([]);
+  const [width, setWidth] = useState(window.innerWidth);
+
+  const updateWidth = () => {
+    setWidth(window.innerWidth);
+  }
 
   useEffect(() => {
-    setMoviesList(movies);
-  }, [])
+    if (width > 1137) {
+      setMoviesList(movies);
+    } else if (width < 1138 && width > 768) {
+      setMoviesList(movies.slice(0, 8));
+    } else {
+      setMoviesList(movies.slice(0, 5));
+    }
+  }, [width])
+
+  useEffect(() => {
+    window.addEventListener("resize", updateWidth);
+    return () => {
+      window.removeEventListener("resize", updateWidth);
+    }
+  })
 
   return (
     <BrowserRouter>

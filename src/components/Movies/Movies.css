@@ -37,3 +37,16 @@
     margin-top: 62px;
   }
 }
+
+@media screen and (max-width: 700px) {
+  .movies {
+    max-width: calc(100% - 20px);
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .movies__more-button {
+    margin-top: 60px;
+    min-width: calc(100% - 80px);
+  }
+}
