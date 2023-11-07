@@ -81,6 +81,7 @@
 
 @media screen and (max-width: 1010px) {
   .about-me {
+    margin: 80px auto 0;
     min-width: calc(100% - 100px);
     grid-template-columns: 364px 1fr 255px;
     grid-template-rows: 51px 66px 306px;
@@ -92,11 +93,13 @@
   }
 
   .about-me__profession {
+    margin: 16px 0 0;
     font-size: 12px;
     line-height: 18px;
   }
 
   .about-me__text {
+    margin: 20px 0 auto;
     font-size: 12px;
     line-height: 18px;
   }
@@ -104,6 +107,7 @@
 
 @media screen and (max-width: 680px) {
   .about-me {
+    margin: 70px auto 0;
     min-width: 0;
     max-width: calc(100% - 28px);
     grid-template-columns: minmax(292px, max-content);
@@ -122,6 +126,7 @@
   }
 
   .about-me__profession {
+    margin: 20px 0 0;
     font-size: 11px;
     line-height: 16px;
   }

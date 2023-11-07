@@ -7,7 +7,7 @@ const Logo = ({ className }) => {
 
   return (
       <img
-        className={className}
+        className={`${className} logo`}
         onClick={() => {navigate("/")}}
         src={logo}
         alt="Логотип"

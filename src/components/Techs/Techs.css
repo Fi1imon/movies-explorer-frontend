@@ -14,7 +14,6 @@
 .techs__sub-header {
   margin: 90px auto 0;
   max-width: 600px;
-  min-height: 58px;
   font-size: 50px;
   font-weight: 400;
   line-height: 58px;
@@ -63,11 +62,17 @@
 
 @media screen and (max-width: 1279px) {
   .techs {
+    min-height: 578px;
     min-width: 100%;
   }
 
   .techs__header {
+    margin: 90px auto 0;
     min-width: calc(100% - 100px);
+  }
+
+  .techs__sub-header {
+    margin: 80px auto 0;
   }
 
   .techs__container {
@@ -90,13 +95,16 @@
 @media screen and (max-width: 700px) {
   .techs {
     min-width: 100%;
+    background: #202020;
   }
 
   .techs__header {
+    margin: 70px auto 0;
     min-width: calc(100% - 36px);
   }
 
   .techs__sub-header {
+    margin: 60px auto 0;
     font-size: 30px;
     line-height: 36px;
   }
@@ -105,10 +113,12 @@
     margin: 50px auto 70px;
     grid-template-columns: repeat(2, 84px);
     grid-auto-columns: 84px;
+    grid-template-rows: 57px;
     grid-auto-rows: 57px;
   }
 
   .techs__text {
+    margin: 24px auto 0;
     max-width: calc(100% - 36px);
     font-size: 11px;
     line-height: 16px;

@@ -7,7 +7,7 @@ const MoreMovies = ({ isButtonShown }) => {
       {isButtonShown ? <Button
         buttonText="Ещё"
         buttonType="button"
-        className="movies__more-button"
+        className="more-movies__more-button"
       /> : ""}
     </div>
   )

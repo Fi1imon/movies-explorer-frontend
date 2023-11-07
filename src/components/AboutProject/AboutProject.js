@@ -3,7 +3,7 @@
 const AboutProject = () => {
 
   return (
-    <div className="about-project" id="about-project">
+    <section className="about-project" id="about-project">
       <h2 className="about-project__header main__header grid-block">О проекте</h2>
       <h3 className="about-project__sub-header about-project__sub-header_left grid-block">
         Дипломный проект включал 5 этапов
@@ -17,11 +17,11 @@ const AboutProject = () => {
       <p className="about-project__text about-project__text_right grid-block">
         У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.
       </p>
-      <div className="about-project__progress about-project__progress_left grid-block">1 неделя</div>
-      <div className="about-project__progress about-project__progress_right grid-block">4 недели</div>
+      <div className="about-project__progress about-project__progress_left grid-block"><p className="about-project__progress-text">1 неделя</p></div>
+      <div className="about-project__progress about-project__progress_right grid-block"><p className="about-project__progress-text">4 недели</p></div>
       <p className="about-project__caption about-project__caption_left grid-block">Back-end</p>
       <p className="about-project__caption about-project__caption_right grid-block">Front-end</p>
-    </div>
+    </section>
   )
 }
 

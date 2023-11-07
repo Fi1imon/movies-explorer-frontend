@@ -1,7 +1,7 @@
 const Portfolio = () => {
 
   return (
-    <div className="portfolio">
+    <section className="portfolio">
       <h2 className="portfolio__header">Портфолио</h2>
       <ul className="portfolio__list">
         <li className="portfolio__item">
@@ -23,7 +23,7 @@ const Portfolio = () => {
           </a>
         </li>
       </ul>
-    </div>
+    </section>
   );
 }
 

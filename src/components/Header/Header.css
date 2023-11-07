@@ -1,15 +1,13 @@
-.display_flex {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .header {
   margin: 0 auto;
   padding: 0;
   max-width: 1140px;
   min-height: 74px;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header__button {
@@ -55,6 +53,10 @@
 
 .header__buttons {
   min-width: 183px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .header__register {
@@ -102,5 +104,27 @@
     max-width: calc(100% - 28px);
   }
 
+  .header__buttons {
+    min-width: 104px;
+  }
+
+  .header__button {
+    font-size: 10px;
+  }
+
+  .header__register {
+    margin: 0 14px 0 0;
+    min-width: 64px;
+  }
+
+  .header__login {
+    min-width: 54px;
+    min-height: 26px;
+  }
+
+  .header__menu {
+    width: 40px;
+    height: 43px;
+  }
 
 }

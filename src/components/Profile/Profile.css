@@ -118,13 +118,14 @@
   }
 }
 
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 767px) {
   .profile {
     margin: 70px auto 0;
     max-width: calc(100% - 30px);
   }
 
   .profile__container {
+    margin: 80px auto 0;
     max-width: 100%;
     grid-template-columns: minmax(260px, max-content);
     grid-template-rows: 31px 31px 379px 48px;

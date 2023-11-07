@@ -6,3 +6,41 @@
   justify-content: center;
 }
 
+.more-movies__more-button {
+  margin: 62px auto 80px;
+  padding: 0;
+  min-width: 320px;
+  min-height: 36px;
+  background: #202020;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0;
+  text-align: center;
+  border: 1px solid #424242;
+  border-radius: 6px;
+  transition: opacity .2s linear;
+}
+
+@media screen and  (max-width: 1279px) {
+  .more-movies {
+    min-height: 163px;
+  }
+
+  .more-movies__more-button {
+    margin-top: 59px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .more-movies {
+    min-height: 150px;
+    max-height: 176px;
+  }
+
+  .more-movies__more-button {
+    margin: 60px auto 85px;
+    min-width: 240px;
+  }
+}

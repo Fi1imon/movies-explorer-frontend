@@ -10,13 +10,13 @@ const Main = () => {
 
   return (
     <>
-      <section className="main">
+      <main className="main">
         <Promo />
         <AboutProject />
         <Techs />
         <AboutMe />
         <Portfolio />
-      </section>
+      </main>
       <Footer />
     </>
   )

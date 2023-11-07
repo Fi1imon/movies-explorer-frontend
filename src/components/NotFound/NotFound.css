@@ -65,3 +65,24 @@
     margin: 408px auto 0;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .not-found__container {
+    margin: 329px auto 0;
+  }
+
+  .not-found__title {
+    font-size: 80px;
+    line-height: 97px;
+  }
+
+  .not-found__text {
+    margin: 10px 0 0;
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .not-found__button {
+    margin: 284px auto 0;
+  }
+}

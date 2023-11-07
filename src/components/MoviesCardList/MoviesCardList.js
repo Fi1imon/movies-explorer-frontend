@@ -3,7 +3,7 @@ import MoviesCard from "../MoviesCard/MoviesCard";
 const MoviesCardList = ({ movies }) => {
 
   return (
-    <div className="movies-list">
+    <ul className="movies-list">
       {movies.map((movie) => (
         <MoviesCard
           key={movie.id}
@@ -13,7 +13,7 @@ const MoviesCardList = ({ movies }) => {
           movieOwner={movie.owner}
         />
       ))}
-    </div>
+    </ul>
   );
 }
 

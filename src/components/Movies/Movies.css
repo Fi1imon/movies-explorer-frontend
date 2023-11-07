@@ -6,22 +6,7 @@
   flex-direction: column;
 }
 
-.movies__more-button {
-  margin: 50px auto 80px;
-  padding: 0;
-  min-width: 320px;
-  min-height: 36px;
-  background: #202020;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 15px;
-  letter-spacing: 0;
-  text-align: center;
-  border: 1px solid #424242;
-  border-radius: 6px;
-  transition: opacity .2s linear;
-}
+
 
 .movies__more-button:hover {
   cursor: pointer;
@@ -32,21 +17,10 @@
   .movies {
     max-width: calc(100% - 60px);
   }
-
-  .movies__more-button {
-    margin-top: 62px;
-  }
 }
 
 @media screen and (max-width: 700px) {
   .movies {
     max-width: calc(100% - 20px);
-  }
-}
-
-@media screen and (max-width: 400px) {
-  .movies__more-button {
-    margin-top: 60px;
-    min-width: calc(100% - 80px);
   }
 }

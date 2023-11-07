@@ -1,5 +1,7 @@
 /*header меню*/
 .navigation {
+  position: absolute;
+  left: calc((100% - 212px) / 2);
   min-width: 211px;
   max-height: 18px;
   display: flex;
@@ -60,12 +62,12 @@
   /*grid-template-rows: 22px 22px 1fr 638px 1fr 32px 1fr;*/
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
 }
 
 .hamburger__close-button {
-  margin: 22px 22px 0 0;
+  margin: 27px 27px 0 0;
   padding: 0;
   width: 22px;
   height: 22px;
@@ -84,7 +86,7 @@
 }
 
 .hamburger__links {
-  margin: 105px 0 auto 0;
+  margin: 111px 0 auto 0;
   width: 340px;
   display: grid;
   grid-template-rows: repeat(3, 28px);
@@ -120,7 +122,17 @@
 }
 
 .hamburger__account-button {
-  margin-bottom: 90px;
+  margin: 0 0 90px 0;
+  padding: 0;
+  min-width: 100px;
+  min-height: 32px;
+  border-radius: 20px;
+  background: #313131;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  border: none;
 }
 
 @media screen and (max-width: 520px){
@@ -130,7 +142,7 @@
   }
 
   .hamburger__close-button {
-    margin: 13px 13px 0 0;
+    margin: 18px 18px 0 0;
   }
 
   .hamburger__link {
@@ -138,10 +150,10 @@
   }
 
   .hamburger__links {
-    margin: 99px 0 auto 0;
+    margin: 105px 0 437px 0;
     grid-template-rows: repeat(3, 28px);
     grid-template-columns: 340px;
     grid-auto-rows: 28px;
-    grid-row-gap: 15px;
+    grid-row-gap: 18px;
   }
 }

@@ -5,6 +5,7 @@ import headerMenu from "../../images/headerMenu.svg";
 import Navigation from "../Navigation/Navigation";
 import Button from "../Button/Button";
 import Logo from "../Logo/Logo";
+import UnauthorizedHeader from "../UnauthorizedHeader/UnauthorizedHeader";
 
 const Header = ({ loggedIn }) => {
   const navigate = useNavigate();
@@ -26,29 +27,35 @@ const Header = ({ loggedIn }) => {
         handleClick={() => {navigate("/profile")}}
       />
     )} else { return (
-      <div className="header__buttons display_flex">
+      <div className="header__buttons">
         <Button
           className="header__register header__button"
           buttonText='Регистрация'
           buttonType="button"
+          handleClick={() => {navigate("/sign-up")}}
         />
         <Button
           className="header__login header__button"
           buttonText='Войти'
           buttonType="button"
+          handleClick={() => {navigate("/sign-in")}}
         />
       </div>
     )}
   }
   return (
-    <header className="header display_flex">
-      <Logo className="header__logo" />
-      <Navigation
-        isOpened={isNavTabOpened}
-        setIsOpened={setIsNavTabOpened}
-      />
-      {renderButtons()}
-    </header>
+    loggedIn || window.location.pathname === '/' ? (
+      <header className="header">
+        <Logo className="header__logo" />
+        {loggedIn ? <Navigation
+          isOpened={isNavTabOpened}
+          setIsOpened={setIsNavTabOpened}
+        /> : null}
+        {renderButtons()}
+      </header>
+    ) : (
+      <UnauthorizedHeader />
+    )
   )
 };
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from "../Button/Button";
 
-const Profile = () => {
+const Profile = ({ setLoggedIn }) => {
   const [user, setUser] = useState({ name: 'Виталий', email: 'pochta@yandex.ru' });
 
   const handleChange = (e) => {
@@ -34,6 +34,7 @@ const Profile = () => {
             className="profile__button profile__logout"
             buttonText="Выйти из аккаунта"
             buttonType="button"
+            handleClick={() => setLoggedIn(false)}
           />
         </div>
       </form>

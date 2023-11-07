@@ -10,7 +10,7 @@ const Register = () => {
   }
 
   return (
-    <section className="register">
+    <div className="register">
       <AuthenticationForm className="register__form">
         <Input
           type="text"
@@ -49,7 +49,7 @@ const Register = () => {
           errorClassName="input__input_invalid"
         />
       </AuthenticationForm>
-    </section>
+    </div>
   )
 }
 

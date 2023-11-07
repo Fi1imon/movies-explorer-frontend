@@ -1,6 +1,6 @@
 const Techs = () => {
   return (
-    <div className="techs" id="techs">
+    <section className="techs" id="techs">
       <h2 className="techs__header main__header ">Технологии</h2>
       <h3 className="techs__sub-header">7 технологий</h3>
       <p className="techs__text">
@@ -15,7 +15,7 @@ const Techs = () => {
           <li className="techs__tech">Express.js</li>
           <li className="techs__tech">MongoDB</li>
         </ul>
-    </div>
+    </section>
   )
 }
 

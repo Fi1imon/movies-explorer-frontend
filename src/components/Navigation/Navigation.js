@@ -19,28 +19,34 @@ const Navigation = ({ isOpened, setIsOpened }) => {
           <nav className="hamburger__links">
             <NavLink
               to="/"
+              onClick={closeNavTab}
               className={({ isActive }) =>
                 `hamburger__link ${isActive ? "hamburger__link_active" : ""}`
               }
             >Главная</NavLink>
             <NavLink
               to="/movies"
+              onClick={closeNavTab}
               className={({ isActive }) =>
                 `hamburger__link ${isActive ? "hamburger__link_active" : ""}`
               }
             >Фильмы</NavLink>
             <NavLink
               to="/saved-movies"
+              onClick={closeNavTab}
               className={({ isActive }) =>
                 `hamburger__link ${isActive ? "hamburger__link_active" : ""}`
               }
-            >Сохраненные фильмы</NavLink>
+            >Сохранённые фильмы</NavLink>
           </nav>
           <Button
-            className="header__account header__button hamburger__account-button"
+            className="hamburger__account-button"
             buttonText='Аккаунт'
             buttonType="button"
-            handleClick={() => {navigate("/profile")}}
+            handleClick={() => {
+              navigate("/profile");
+              closeNavTab();
+            }}
           />
         </div>
       </section>

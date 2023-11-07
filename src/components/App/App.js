@@ -8,25 +8,25 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import Profile from "../Profile/Profile";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import Login from "../Login/Login";
-import UnauthorizedHeader from "../UnauthorizedHeader/UnauthorizedHeader";
 import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 
 import { movies, savedMovies } from "../../utils/constants";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const [moviesList, setMoviesList] = useState([]);
   const [width, setWidth] = useState(window.innerWidth);
 
   const updateWidth = () => {
-    setWidth(window.innerWidth);
+    setWidth(window.innerWidth)
   }
+
 
   useEffect(() => {
     if (width > 1137) {
       setMoviesList(movies);
-    } else if (width < 1138 && width > 768) {
+    } else if (width < 1138 && width > 767) {
       setMoviesList(movies.slice(0, 8));
     } else {
       setMoviesList(movies.slice(0, 5));
@@ -43,14 +43,12 @@ function App() {
   return (
     <BrowserRouter>
       <div className="page">
-        {isLoggedIn ? <Header
-          loggedIn={isLoggedIn}
-        /> : <UnauthorizedHeader />}
+        {/*{isLoggedIn || window.location.pathname === '/'  ? <Header*/}
+        {/*  loggedIn={isLoggedIn}*/}
+        {/*/> : <UnauthorizedHeader />}*/}
+        <Header loggedIn={isLoggedIn} />
         <Routes>
-          <Route path="/" element={<ProtectedRoute
-            loggedIn={isLoggedIn}
-            component={Main}
-          />} />
+          <Route path="/" element={<Main />} />
           <Route path="/movies" element={<ProtectedRoute
             loggedIn={isLoggedIn}
             component={Movies}
@@ -64,6 +62,7 @@ function App() {
           <Route path="/profile" element={<ProtectedRoute
             loggedIn={isLoggedIn}
             component={Profile}
+            setLoggedIn={setIsLoggedIn}
           />} />
           <Route path="/sign-up" element={!isLoggedIn ? <Register /> : <Navigate to="/" />} />
           <Route path="/sign-in" element={!isLoggedIn ? <Login /> : <Navigate to="/" />} />

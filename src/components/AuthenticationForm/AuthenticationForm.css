@@ -1,16 +1,17 @@
-.authentication-form {
+.authentication {
   margin: 40px auto 0;
-  min-height: 378px;
+  min-height: 412px;
   display: flex;
   flex-direction: column;
 }
 
-.authentication-form__submit-button {
+.authentication__submit-button {
   margin: auto auto 0;
   padding: 0;
   min-height: 45px;
   min-width: 100%;
   background: #4285F4;
+  color: #fff;
   font-size: 14px;
   font-weight: 500;
   line-height: 17px;
@@ -21,7 +22,7 @@
   transition: opacity .2s linear;
 }
 
-.authentication-form__submit-button:hover {
+.authentication__submit-button:hover {
   cursor: pointer;
   opacity: .8;
 }
@@ -61,13 +62,23 @@
   opacity: .8;
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 767px) {
+  .authentication {
+    margin: 80px auto 0;
+    min-height: 500px;
+  }
+
   .authentication__text {
     font-size: 12px;
     line-height: 15px;
   }
 
   .authentication__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .authentication__submit-button {
     font-size: 12px;
     line-height: 15px;
   }

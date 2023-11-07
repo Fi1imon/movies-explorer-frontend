@@ -11,7 +11,7 @@ const Login = () => {
   }
 
   return (
-    <section className="login">
+    <div className="login">
       <AuthenticationForm className="login__form">
         <Input
           type="email"
@@ -38,7 +38,7 @@ const Login = () => {
           errorClassName="input__input_invalid"
         />
   </AuthenticationForm>
-    </section>
+    </div>
   )
 }
 

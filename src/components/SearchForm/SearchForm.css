@@ -1,5 +1,10 @@
 .search-form {
+  margin: 80px 0 0;
   max-width: 100%;
+
+}
+
+.search-form__container {
   max-height: 50px;
   display: flex;
   align-items: center;
@@ -40,15 +45,14 @@
 }
 
 @media screen and (max-width: 700px ) {
+  .search-form {
+    margin: 80px auto 0;
+    min-width: 292px;
+  }
+
   .search-form__input {
     padding: 0 0 0 13px;
-
-  }
-}
-
-@media screen and (max-width: 350px) {
-  .search-form {
-    margin: 0 auto;
-    max-width: 292px;
+    min-height: 44px;
+    min-width: calc(100% - 67px);
   }
 }
