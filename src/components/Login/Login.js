@@ -1,40 +1,58 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useFormAndValidation } from "../../hooks/useFormAndValidation";
 
 import Input from "../Input/Input";
 import AuthenticationForm from "../AuthenticationForm/AuthenticationForm";
 
-const Login = () => {
-  const [formValues, setFormValues] = useState({})
-  const handleChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value });
-    console.log(formValues);
+const Login = ({ onLogin }) => {
+  const navigate = useNavigate();
+  const [errMessage, setErrMessage] = useState(null);
+  const { values, handleChange, errors, isValid } = useFormAndValidation();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    onLogin({
+      email: values.loginEmail,
+      password: values.loginPassword,
+      goMoviesPage: () => navigate("/movies"),
+      setError: (message) => setErrMessage(message),
+    })
   }
 
   return (
     <div className="login">
-      <AuthenticationForm className="login__form">
+      <AuthenticationForm
+        className="login__form"
+        handleSubmit={handleSubmit}
+        isValid={isValid}
+        errMessage={errMessage}
+      >
         <Input
           type="email"
-          id ="email"
-          name="email"
+          id ="login-email-input"
+          name="loginEmail"
           inputLabel="E-mail"
           placeholder="primer@yandex.ru"
-          isValid={true}
-          value={formValues.email || ""}
+          isValid={isValid}
+          value={values.loginEmail || ""}
           handleChange={handleChange}
-          error=""
-          errorClassName=""
+          error={errors.loginEmail}
+          errorClassName="input__input_invalid"
         />
         <Input
           type="password"
-          id ="password"
-          name="password"
+          id ="login-password-input"
+          name="loginPassword"
           inputLabel="Пароль"
           placeholder="Пароль"
-          isValid={true}
-          value={formValues.password || ""}
+          isValid={isValid}
+          value={values.loginPassword || ""}
+          minLength={8}
+          maxLength={20}
           handleChange={handleChange}
-          error=""
+          error={errors.loginPassword}
           errorClassName="input__input_invalid"
         />
   </AuthenticationForm>

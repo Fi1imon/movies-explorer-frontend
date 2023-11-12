@@ -133,6 +133,12 @@
   font-weight: 500;
   line-height: 16px;
   border: none;
+  transition: opacity .2s linear;
+}
+
+.hamburger__account-button:hover {
+  cursor: pointer;
+  opacity: .8;
 }
 
 @media screen and (max-width: 520px){

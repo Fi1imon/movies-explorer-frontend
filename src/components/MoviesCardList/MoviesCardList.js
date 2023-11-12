@@ -1,19 +1,29 @@
 import MoviesCard from "../MoviesCard/MoviesCard";
+import {useEffect} from "react";
 
-const MoviesCardList = ({ movies }) => {
+const MoviesCardList = ({ movies, onSaveMovie, onDeleteMovie }) => {
+
+  useEffect(() => {
+  }, [])
 
   return (
-    <ul className="movies-list">
-      {movies.map((movie) => (
-        <MoviesCard
-          key={movie.id}
-          movieImage={movie.image}
-          movieName={movie.nameRU}
-          movieDuration={movie.duration}
-          movieOwner={movie.owner}
-        />
-      ))}
-    </ul>
+    <>
+      {
+        movies.length > 0 ?
+          <ul className="movies-list">
+            {movies.map((movie) =>
+              movie ? (<MoviesCard
+                key={movie.id || movie.movieId}
+                movie={movie}
+                onSaveMovie={onSaveMovie}
+                onDeleteMovie={onDeleteMovie}
+              />) : null
+            )}
+          </ul> :
+          <p className="movies-list__text">Ничего не найдено</p>
+      }
+    </>
+
   );
 }
 

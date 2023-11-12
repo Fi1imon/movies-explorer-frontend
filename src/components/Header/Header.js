@@ -24,7 +24,7 @@ const Header = ({ loggedIn }) => {
         className="header__account header__button"
         buttonText='Аккаунт'
         buttonType="button"
-        handleClick={() => {navigate("/profile")}}
+        handleClick={() => navigate("/profile")}
       />
     )} else { return (
       <div className="header__buttons">
@@ -32,13 +32,13 @@ const Header = ({ loggedIn }) => {
           className="header__register header__button"
           buttonText='Регистрация'
           buttonType="button"
-          handleClick={() => {navigate("/sign-up")}}
+          handleClick={() => navigate("/sign-up")}
         />
         <Button
           className="header__login header__button"
           buttonText='Войти'
           buttonType="button"
-          handleClick={() => {navigate("/sign-in")}}
+          handleClick={() => navigate("/sign-in")}
         />
       </div>
     )}

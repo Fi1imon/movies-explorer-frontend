@@ -28,6 +28,11 @@
   outline: none;
 }
 
+.search-form__input:focus {
+  box-sizing: content-box;
+  outline: 1px solid #3456F3;
+}
+
 .search-form__button {
   margin: 0;
   padding: 0;

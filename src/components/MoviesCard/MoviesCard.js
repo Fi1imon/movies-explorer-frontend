@@ -1,35 +1,72 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useResolvedPath } from "react-router-dom";
 
 import Button from "../Button/Button";
+import { SavedMoviesContext } from "../../contexts/SavedMoviesContext";
 
-const MoviesCard = ({ movieImage, movieName, movieDuration, movieOwner }) => {
+const MoviesCard = ({ movie, onSaveMovie, onDeleteMovie }) => {
+  const savedMovies = useContext(SavedMoviesContext);
+  const [isMovieOwner, setIsMovieOwner] = useState(Boolean);
   const [isMouseOver, setIsMouseOver] = useState(false)
-  const isMovieOwner = movieOwner === 'user._id' // Проверяем, является ли пользователь владельцем фильма
+  const path = useResolvedPath().pathname;
+
+  useEffect(() => {
+    if(!movie.owner) {
+      savedMovies.forEach((item) => {
+        if(item.movieId === movie.id) {
+          setIsMovieOwner(true)
+        }
+      })
+    } else {
+      setIsMovieOwner(true);
+    }
+  }, [])
+
   const convertDuration = (duration) => {
     const hours = Math.floor(duration / 60);
     const minutes = duration % 60;
     return `${hours}ч ${minutes < 10 ? `0${minutes}` : minutes}м`;
   }
-  const path = useResolvedPath().pathname;
-  const isMoviesPage = () => {
-    return  path === '/movies';
-  };
 
+  const handleClick = () => {
+    if(!isMovieOwner) {
+      onSaveMovie({
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `https://api.nomoreparties.co/${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        thumbnail: `https://api.nomoreparties.co/${movie.image.url}`,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
+      })
+      setIsMovieOwner(true)
+    } else {
+      movie.id ?
+        onDeleteMovie(movie.id) :
+        onDeleteMovie(movie.movieId)
+      setIsMovieOwner(false)
+    }
+  }
 
   return (
     <li className="movie-card"  onMouseEnter={() => setIsMouseOver(true)} onMouseLeave={() => setIsMouseOver(false)}>
-      {isMoviesPage() ? <Button
+      {path === '/movies' ? <Button
         className={`movie-card__save-button ${isMouseOver || window.innerWidth < 1138 ? "movie-card__save-button_visible" : ""} ${isMovieOwner ? "movie-card__save-button_saved" : ""}`}
         buttonText={`${isMovieOwner ? "" : "Сохранить"}`}
         buttonType="button"
+        handleClick={handleClick}
       /> : <Button
         className={`movie-card__save-button movie-card__save-button_delete ${isMouseOver || window.innerWidth < 1138 ? "movie-card__save-button_visible" : ""} `}
         buttonType="button"
+        handleClick={handleClick}
       />}
-      <img className="movie-card__image" src={movieImage} alt="movie"/>
-      <p className="movie-card__title">{movieName}</p>
-      <p className="movie-card__duration">{convertDuration(movieDuration)}</p>
+      <img className="movie-card__image" src={movie.image.url ? `https://api.nomoreparties.co/${movie.image.url}` : movie.image} alt="movie"/>
+      <p className="movie-card__title">{movie.nameRU}</p>
+      <p className="movie-card__duration">{convertDuration(movie.duration)}</p>
     </li>
   )
 }

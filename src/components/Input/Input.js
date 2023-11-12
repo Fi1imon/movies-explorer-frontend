@@ -1,6 +1,6 @@
 
 const Input = ({
-  type, id, name, inputLabel, placeholder, isValid, minLength, maxLength, value, handleChange, error, errorClassName,
+  type, id, name, inputLabel, placeholder, pattern, minLength, maxLength, value, handleChange, error, errorClassName,
                }) => {
 
   return (
@@ -9,11 +9,12 @@ const Input = ({
       <input
         type={type}
         id={id}
-        className={`input__input ${isValid ? '' : errorClassName} ${error ? 'input__input_invalid' : ''}`}
+        className={`input__input ${error === '' || error === undefined ? '' : errorClassName} ${error ? 'input__input_invalid' : ''}`}
         name={name}
         placeholder={placeholder}
         minLength={minLength}
         maxLength={maxLength}
+        pattern={pattern}
         value={value}
         onChange={handleChange}
         required

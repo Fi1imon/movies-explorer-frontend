@@ -11,27 +11,20 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import NotFound from "../NotFound/NotFound";
 
-import { movies, savedMovies } from "../../utils/constants";
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
+import mainApi from "../../utils/MainApi";
+import {SavedMoviesContext} from "../../contexts/SavedMoviesContext";
 
 function App() {
+  const [savedMovies, setSavedMovies] = useState([]);
+  const [currentUser, setCurrentUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(true);
-  const [moviesList, setMoviesList] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [width, setWidth] = useState(window.innerWidth);
 
   const updateWidth = () => {
     setWidth(window.innerWidth)
   }
-
-
-  useEffect(() => {
-    if (width > 1137) {
-      setMoviesList(movies);
-    } else if (width < 1138 && width > 767) {
-      setMoviesList(movies.slice(0, 8));
-    } else {
-      setMoviesList(movies.slice(0, 5));
-    }
-  }, [width])
 
   useEffect(() => {
     window.addEventListener("resize", updateWidth);
@@ -40,34 +33,154 @@ function App() {
     }
   })
 
+  useEffect(() => {
+    setIsLoading(true);
+    mainApi.getUserInfo()
+      .then((res) => {
+        setCurrentUser(res);
+        setIsLoggedIn(true);
+        mainApi.getSavedFilms()
+          .then((res) => {
+            setSavedMovies(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsLoggedIn(false);
+      })
+      .finally(() => setIsLoading(false));
+  }, [isLoggedIn])
+
+  const onRegister = ({ name, email, password, goMoviesPage, setError }) => {
+    mainApi.register({ name, email, password })
+      .then(() => {
+        setIsLoggedIn(true);
+        goMoviesPage();
+      })
+      .catch((err) => {
+        if(err.includes('409')) {
+          setError('Пользователь с таким email уже существует.');
+        }
+        if(err.includes('400')) {
+          setError('При регистрации пользователя произошла ошибка.');
+        }
+        console.log(err);
+      })
+  }
+
+  const onLogin = ({ email, password, goMoviesPage, setError }) => {
+    mainApi.login({ email, password })
+      .then((user) => {
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+        goMoviesPage();
+      })
+      .catch((err) => {
+        setError('При авторизации пользователя произошла ошибка.');
+        console.log(err);
+      })
+  }
+
+  const onLogout = ({ navigate }) => {
+    mainApi.logout()
+      .then(() => {
+        navigate('/');
+        setCurrentUser({});
+        setIsLoggedIn(false);
+        localStorage.removeItem('filterOptions');
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  const onPatchUserInfo = ({ name, email, setMessage }) => {
+    setIsLoading(true);
+    mainApi.patchUserInfo({ name, email })
+      .then((res) => {
+        setCurrentUser(res);
+        setMessage({
+          isError: false,
+          message: 'Успешно!'
+        })
+      })
+      .catch((err) => {
+        if(err.includes('409')) {
+          setMessage({
+            isError: true,
+            message: 'Пользователь с таким email уже существует.'
+          });
+        }
+        if(err.includes('400')) {
+          setMessage({
+            isError: true,
+            message: 'При обновлении профиля произошла ошибка.'
+          });
+        }
+        console.log(err);
+      })
+      .finally(() => setIsLoading(false));
+  }
+
+  const onSaveMovie = (movie) => {
+    mainApi.saveFilm(movie)
+      .then((movie) => {
+        setSavedMovies((savedMovies) => [...savedMovies, movie]);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
+  const onDeleteMovie = (movieId) => {
+    mainApi.deleteFilm({ id: movieId })
+      .then(() => {
+        setSavedMovies(
+          (savedMovies) => savedMovies.filter((movie) => movie.movieId !== movieId)
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  }
+
   return (
     <BrowserRouter>
       <div className="page">
-        {/*{isLoggedIn || window.location.pathname === '/'  ? <Header*/}
-        {/*  loggedIn={isLoggedIn}*/}
-        {/*/> : <UnauthorizedHeader />}*/}
-        <Header loggedIn={isLoggedIn} />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/movies" element={<ProtectedRoute
-            loggedIn={isLoggedIn}
-            component={Movies}
-            movies={moviesList}
-          />} />
-          <Route path="/saved-movies" element={<ProtectedRoute
-            loggedIn={isLoggedIn}
-            component={SavedMovies}
-            movies={savedMovies}
-          />} />
-          <Route path="/profile" element={<ProtectedRoute
-            loggedIn={isLoggedIn}
-            component={Profile}
-            setLoggedIn={setIsLoggedIn}
-          />} />
-          <Route path="/sign-up" element={!isLoggedIn ? <Register /> : <Navigate to="/" />} />
-          <Route path="/sign-in" element={!isLoggedIn ? <Login /> : <Navigate to="/" />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <CurrentUserContext.Provider value={ currentUser }>
+        <SavedMoviesContext.Provider value={ savedMovies }>
+          {isLoading && <div className="page__loading"><div className="page__spinner" /></div>}
+          <Header loggedIn={ isLoggedIn } />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/movies" element={<ProtectedRoute
+              loggedIn={ isLoggedIn }
+              component={ Movies }
+              width={ width }
+              onSaveMovie={ onSaveMovie }
+              onDeleteMovie={ onDeleteMovie }
+            />} />
+            <Route path="/saved-movies" element={<ProtectedRoute
+              loggedIn={ isLoggedIn }
+              component={ SavedMovies }
+              width={ width }
+              onDeleteMovie={ onDeleteMovie }
+            />} />
+            <Route path="/profile" element={<ProtectedRoute
+              loggedIn={ isLoggedIn }
+              component={ Profile }
+              onLogout={ onLogout }
+              onSubmit={ onPatchUserInfo }
+            />} />
+            <Route path="/sign-up" element={ !isLoggedIn ? <Register onRegister={ onRegister } /> : <Navigate to="/" /> } />
+            <Route path="/sign-in" element={ !isLoggedIn ? <Login onLogin={ onLogin } /> : <Navigate to="/" /> } />
+            <Route path="*" element={ <NotFound /> } />
+          </Routes>
+        </SavedMoviesContext.Provider>
+        </CurrentUserContext.Provider>
       </div>
     </BrowserRouter>
   );

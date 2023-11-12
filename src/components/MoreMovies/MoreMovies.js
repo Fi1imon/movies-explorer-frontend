@@ -1,14 +1,31 @@
-import Button from "../Button/Button";
+import { addMoreMovies } from "../../utils/moviesInteractions";
 
-const MoreMovies = ({ isButtonShown }) => {
+const MoreMovies = ({
+  isButtonShown,
+  filmsList,
+  renderedFilms,
+  loadedFilms,
+  setRenderedFilms,
+  setLoadedFilms,
+  setIsMoreButtonShown,
+  width
+}) => {
 
   return (
     <div className="more-movies">
-      {isButtonShown ? <Button
-        buttonText="Ещё"
-        buttonType="button"
+      {isButtonShown ? <button
+        type="button"
         className="more-movies__more-button"
-      /> : ""}
+        onClick={ () => addMoreMovies({
+          filmsList,
+          renderedFilms,
+          loadedFilms,
+          setRenderedFilms,
+          setLoadedFilms,
+          setIsMoreButtonShown,
+          width
+        }) }
+      >Ещё</button> : null}
     </div>
   )
 }
