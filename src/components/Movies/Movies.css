@@ -1,0 +1,26 @@
+.movies {
+  margin: 0 auto;
+  padding: 0;
+  max-width: 1140px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.movies__more-button:hover {
+  cursor: pointer;
+  opacity: .8;
+}
+
+@media screen and (max-width: 1200px) {
+  .movies {
+    max-width: calc(100% - 60px);
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .movies {
+    max-width: calc(100% - 20px);
+  }
+}
