@@ -1,0 +1,144 @@
+.footer {
+  margin: 90px auto 0;
+  max-width: 1140px;
+  max-height: 172px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__header {
+  margin: 0;
+  padding: 0;
+  min-width: 100%;
+  min-height: 37px;
+  color: #8B8B8B;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0;
+  text-align: center;
+  border-bottom: 1px #424242 solid;
+  box-sizing: border-box;
+}
+
+.footer__container {
+  margin: 20px 0;
+  padding: 0;
+  min-width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer__copyright {
+  margin: 0 auto 0 0;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0;
+  text-align: left;
+
+}
+
+.footer__items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.footer__item {
+  margin: 0 20px 0 0;
+  padding: 0;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0;
+  text-align: left;
+}
+
+.footer__item:last-child {
+  margin: 0;
+}
+
+.footer__link {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0;
+  text-align: right;
+  transition: opacity .2s linear;
+}
+
+.footer__link:hover {
+  opacity: .7;
+}
+
+@media screen and (max-width: 1279px) {
+  .footer {
+    max-width: calc(100% - 140px);
+  }
+}
+
+@media screen and (max-width: 1010px) {
+  .footer {
+    max-width: calc(100% - 100px);
+  }
+}
+
+@media screen and (max-width: 868px) {
+  .footer {
+    max-width: calc(100% - 60px);
+  }
+}
+
+@media screen and (max-width: 680px) {
+  .footer {
+    margin: 79px auto 0;
+    max-width: calc(100% - 20px);
+  }
+
+  .footer__header {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .footer__container {
+    margin: 30px auto 20px;
+    flex-direction: column-reverse;
+  }
+
+  .footer__copyright {
+    margin: 30px auto 0;
+    color: #8b8b8b;
+    font-size: 12px;
+    line-height: 15px;
+
+  }
+
+  .footer__items {
+    flex-direction: column;
+  }
+
+  .footer__item {
+    margin: 12px auto 0;
+  }
+
+  .footer__item:last-child {
+    margin: 12px auto 0;
+  }
+
+  .footer__item:first-child {
+    margin: 0;
+  }
+}
