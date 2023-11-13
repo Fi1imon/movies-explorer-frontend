@@ -54,11 +54,11 @@ function App() {
       .finally(() => setIsLoading(false));
   }, [isLoggedIn])
 
-  const onRegister = ({ name, email, password, goMoviesPage, setError }) => {
+  const onRegister = ({ name, email, password, goMoviesPage, setError, setIsValid }) => {
+    setIsValid(false);
     mainApi.register({ name, email, password })
       .then(() => {
-        setIsLoggedIn(true);
-        goMoviesPage();
+        onLogin( { email, password, goMoviesPage, setError } );
       })
       .catch((err) => {
         if(err.includes('409')) {
@@ -69,9 +69,11 @@ function App() {
         }
         console.log(err);
       })
+      .finally(() => setIsValid(true));
   }
 
-  const onLogin = ({ email, password, goMoviesPage, setError }) => {
+  const onLogin = ({ email, password, goMoviesPage, setError, setIsValid }) => {
+    setIsValid(false);
     mainApi.login({ email, password })
       .then((user) => {
         setCurrentUser(user);
@@ -82,6 +84,7 @@ function App() {
         setError('При авторизации пользователя произошла ошибка.');
         console.log(err);
       })
+      .finally(() => setIsValid(true));
   }
 
   const onLogout = ({ navigate }) => {
@@ -91,14 +94,16 @@ function App() {
         setCurrentUser({});
         setIsLoggedIn(false);
         localStorage.removeItem('filterOptions');
+        localStorage.removeItem('Movies');
       })
       .catch((err) => {
         console.log(err);
       })
   }
 
-  const onPatchUserInfo = ({ name, email, setMessage }) => {
+  const onPatchUserInfo = ({ name, email, setMessage, setIsValid }) => {
     setIsLoading(true);
+    setIsValid(false);
     mainApi.patchUserInfo({ name, email })
       .then((res) => {
         setCurrentUser(res);
@@ -122,7 +127,10 @@ function App() {
         }
         console.log(err);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+        setIsValid(true);
+      });
   }
 
   const onSaveMovie = (movie) => {

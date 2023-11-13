@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { validate } from "email-validator";
 
 export function useFormAndValidation() {
   const [ values, setValues ] = useState({});
@@ -10,6 +11,13 @@ export function useFormAndValidation() {
 
     setValues({...values, [name]: value});
     setErrors({...errors, [name]: e.target.validationMessage});
+    if(name.toLowerCase().includes('email') && e.target.validationMessage === '') {
+      if(!validate(value)) {
+        setIsValid(false);
+        setErrors({ ...errors, [name]: 'Некорректный email' });
+      }
+    }
+
     setIsValid(e.target.closest('form').checkValidity());
   }
 

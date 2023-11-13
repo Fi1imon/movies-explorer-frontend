@@ -8,7 +8,7 @@ import AuthenticationForm from "../AuthenticationForm/AuthenticationForm";
 const Register = ({ onRegister }) => {
   const navigate = useNavigate();
   const [errMessage, setErrMessage] = useState(null);
-  const { values, handleChange, errors, isValid, resetForm } = useFormAndValidation();
+  const { values, handleChange, errors, isValid, resetForm, setIsValid } = useFormAndValidation();
 
   useEffect(() => {
     resetForm();
@@ -22,8 +22,9 @@ const Register = ({ onRegister }) => {
       name: values.registrationName,
       email: values.registrationEmail,
       password: values.registrationPassword,
-      goMoviesPage: () => navigate('/sign-in'),
+      goMoviesPage: () => navigate('/movies'),
       setError: (message) => setErrMessage(message),
+      setIsValid: (isValid) => {setIsValid(isValid)}
     });
   }
 

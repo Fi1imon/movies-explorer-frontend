@@ -8,7 +8,7 @@ import AuthenticationForm from "../AuthenticationForm/AuthenticationForm";
 const Login = ({ onLogin }) => {
   const navigate = useNavigate();
   const [errMessage, setErrMessage] = useState(null);
-  const { values, handleChange, errors, isValid } = useFormAndValidation();
+  const { values, handleChange, errors, isValid, setIsValid } = useFormAndValidation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,6 +18,7 @@ const Login = ({ onLogin }) => {
       password: values.loginPassword,
       goMoviesPage: () => navigate("/movies"),
       setError: (message) => setErrMessage(message),
+      setIsValid: (isValid) => {setIsValid(isValid)}
     })
   }
 

@@ -17,6 +17,13 @@ const Movies = ({ loggedIn, width, onSaveMovie, onDeleteMovie }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
+    if(JSON.parse(localStorage.getItem('Movies'))) {
+      setMoviesList(JSON.parse(localStorage.getItem('Movies')));
+      setMovies(JSON.parse(localStorage.getItem('Movies')));
+    }
+  }, []);
+
+  useEffect(() => {
     if (width > 1137) {
       setRenderedFilms(moviesList.slice(0, 12));
       setLoadedFilms(12);
@@ -27,19 +34,20 @@ const Movies = ({ loggedIn, width, onSaveMovie, onDeleteMovie }) => {
       setRenderedFilms(moviesList.slice(0, 5));
       setLoadedFilms(5);
     }
-  }, [moviesList])
+  }, [moviesList]);
 
   useEffect(() => {
     moviesList.length <= renderedFilms.length ?
       setIsMoreButtonShown(false) :
       setIsMoreButtonShown(true);
-  }, [moviesList, renderedFilms])
+  }, [moviesList, renderedFilms]);
 
-  useEffect( () => {
+  const onGetMovies = () => {
     if (loggedIn) {
       setIsLoading(true)
       moviesApi.getFilms()
         .then((res) => {
+          localStorage.setItem('Movies', JSON.stringify(res));
           setMovies(res);
           setMoviesList(res);
         })
@@ -48,15 +56,16 @@ const Movies = ({ loggedIn, width, onSaveMovie, onDeleteMovie }) => {
         })
         .finally(() => setIsLoading(false));
     }
-
-  }, [loggedIn])
+  };
 
   return (
     <>
       <section className="movies">
         <SearchForm
-          filmsList={ movies }
-          setMoviesList={ setMoviesList }
+          getMovies={ onGetMovies }
+          films={ movies }
+          filmsList={ moviesList }
+          setFilmsList={ setMoviesList }
         />
         {isLoading ? <Preloader /> : <MoviesCardList
           movies={ renderedFilms }

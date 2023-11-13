@@ -7,7 +7,6 @@ import { SavedMoviesContext } from "../../contexts/SavedMoviesContext";
 const MoviesCard = ({ movie, onSaveMovie, onDeleteMovie }) => {
   const savedMovies = useContext(SavedMoviesContext);
   const [isMovieOwner, setIsMovieOwner] = useState(Boolean);
-  const [isMouseOver, setIsMouseOver] = useState(false)
   const path = useResolvedPath().pathname;
 
   useEffect(() => {
@@ -53,20 +52,22 @@ const MoviesCard = ({ movie, onSaveMovie, onDeleteMovie }) => {
   }
 
   return (
-    <li className="movie-card"  onMouseEnter={() => setIsMouseOver(true)} onMouseLeave={() => setIsMouseOver(false)}>
+    <li className="movie-card" >
       {path === '/movies' ? <Button
-        className={`movie-card__save-button ${isMouseOver || window.innerWidth < 1138 ? "movie-card__save-button_visible" : ""} ${isMovieOwner ? "movie-card__save-button_saved" : ""}`}
-        buttonText={`${isMovieOwner ? "" : "Сохранить"}`}
+        className={`movie-card__save-button ${ isMovieOwner ? "movie-card__save-button_saved" : "" }`}
+        buttonText={`${ isMovieOwner ? "" : "Сохранить" }`}
         buttonType="button"
-        handleClick={handleClick}
+        handleClick={ handleClick }
       /> : <Button
-        className={`movie-card__save-button movie-card__save-button_delete ${isMouseOver || window.innerWidth < 1138 ? "movie-card__save-button_visible" : ""} `}
+        className={"movie-card__save-button movie-card__save-button_delete"}
         buttonType="button"
-        handleClick={handleClick}
+        handleClick={ handleClick }
       />}
-      <img className="movie-card__image" src={movie.image.url ? `https://api.nomoreparties.co/${movie.image.url}` : movie.image} alt="movie"/>
-      <p className="movie-card__title">{movie.nameRU}</p>
-      <p className="movie-card__duration">{convertDuration(movie.duration)}</p>
+      <a className="movie-card__image-link" href={ movie.trailerLink } target="_blank" rel="noreferrer">
+        <img className="movie-card__image" src={ movie.image.url ? `https://api.nomoreparties.co/${ movie.image.url }` : movie.image } alt="movie"/>
+      </a>
+      <p className="movie-card__title">{ movie.nameRU }</p>
+      <p className="movie-card__duration">{ convertDuration(movie.duration) }</p>
     </li>
   )
 }

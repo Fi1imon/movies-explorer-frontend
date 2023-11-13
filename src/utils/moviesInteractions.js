@@ -16,9 +16,9 @@ export const addMoreMovies = ({
 }
 
 export const filterMovies = ({
-  setMoviesList, filmsList, filterOptions
+  setFilmsList, films, filterOptions, path
 }) => {
-  setMoviesList(filmsList.filter((movie) => {
+  const filteredMovies = films.filter((movie) => {
     if(filterOptions.filmName && filterOptions.isShortFilm) {
       return movie.nameRU.toLowerCase().includes(filterOptions.filmName.toLowerCase()) && movie.duration <= 40
     } else if(filterOptions.isShortFilm) {
@@ -27,5 +27,11 @@ export const filterMovies = ({
       return movie.nameRU.toLowerCase().includes(filterOptions.filmName.toLowerCase())
     }
     return movie
-  }))
+  });
+
+  if(path === '/movies') {
+    localStorage.setItem('filterOptions', JSON.stringify(filterOptions));
+  }
+
+  setFilmsList(filteredMovies);
 }

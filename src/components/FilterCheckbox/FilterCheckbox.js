@@ -1,4 +1,4 @@
-const FilterCheckbox = ({ setFilterOptions, isShort }) => {
+const FilterCheckbox = ({ setFilterOptions, isShort, filter }) => {
 
   return (
     <div className="filter-checkbox">
@@ -8,6 +8,7 @@ const FilterCheckbox = ({ setFilterOptions, isShort }) => {
           type="checkbox"
           checked={isShort || false}
           onChange={() => setFilterOptions(!isShort)}
+          onClick={() => filter(!isShort)}
         />
         <span className="filter-checkbox__visible-checkbox" />
         <span className="filter-checkbox__text">Короткометражки</span>

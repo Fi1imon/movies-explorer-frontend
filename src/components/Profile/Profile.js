@@ -10,7 +10,7 @@ const Profile = ({ onLogout, onSubmit }) => {
   const currentUser = useContext(CurrentUserContext);
   const [errMessage, setErrMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
-  const { values, handleChange, isValid, setValues } = useFormAndValidation();
+  const { values, handleChange, isValid, setValues, setIsValid } = useFormAndValidation();
 
   useEffect(() => {
     setValues({
@@ -30,7 +30,8 @@ const Profile = ({ onLogout, onSubmit }) => {
           isError ?
           setErrMessage(message) :
           setSuccessMessage(message)
-        }
+        },
+        setIsValid: (isValid) => {setIsValid(isValid)}
       });
     }
   }

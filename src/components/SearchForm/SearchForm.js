@@ -4,20 +4,29 @@ import { useResolvedPath } from "react-router-dom";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import { filterMovies } from "../../utils/moviesInteractions";
 
-const SearchForm = ({ filmsList, setMoviesList }) => {
+const SearchForm = ({ films, setFilmsList, getMovies }) => {
   const path = useResolvedPath().pathname;
-  const [filterOptions, setFilterOptions] = useState({});
+  const [filterOptions, setFilterOptions] = useState({
+    filmName: "",
+    isShortFilm: false
+  });
 
   useEffect(() => {
     if(path === '/movies' && localStorage.getItem('filterOptions')) {
       filterMovies({
-        setMoviesList,
-        filmsList,
+        setFilmsList,
+        films,
         filterOptions: JSON.parse(localStorage.getItem('filterOptions'))
       })
       setFilterOptions(JSON.parse(localStorage.getItem('filterOptions')))
+    } else {
+      filterMovies({
+        setFilmsList,
+        films,
+        filterOptions
+      })
     }
-  }, [filmsList])
+  }, [films])
 
   const handleChange = (e) => {
     setFilterOptions({...filterOptions, [e.target.name]: e.target.value})
@@ -26,13 +35,12 @@ const SearchForm = ({ filmsList, setMoviesList }) => {
   const searchFilm = (e) => {
     e.preventDefault();
 
-    if(path === '/movies') {
-      localStorage.setItem('filterOptions', JSON.stringify(filterOptions))
+    if(path === '/movies' && films.length < 1) {
+      getMovies();
     }
+    console.log(films)
 
-    if(filmsList) {
-      filterMovies({ setMoviesList, filmsList, filterOptions })
-    }
+      filterMovies({ setFilmsList, films, filterOptions, path });
   };
 
   return (
@@ -50,6 +58,12 @@ const SearchForm = ({ filmsList, setMoviesList }) => {
           <button className="search-form__button" type="submit" />
         </div>
         <FilterCheckbox
+          filter={(isShortFilm) => filterMovies({
+            setFilmsList,
+            films,
+            filterOptions: {...filterOptions, isShortFilm},
+            path
+          })}
           isShort={filterOptions.isShortFilm}
           setFilterOptions={ (isShortFilm) => setFilterOptions({...filterOptions, isShortFilm}) }
         />
