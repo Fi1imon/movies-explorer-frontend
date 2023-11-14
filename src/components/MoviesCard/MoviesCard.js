@@ -7,6 +7,7 @@ import { SavedMoviesContext } from "../../contexts/SavedMoviesContext";
 const MoviesCard = ({ movie, onSaveMovie, onDeleteMovie }) => {
   const savedMovies = useContext(SavedMoviesContext);
   const [isMovieOwner, setIsMovieOwner] = useState(Boolean);
+  const [isMouseOver, setIsMouseOver] = useState(false)
   const path = useResolvedPath().pathname;
 
   useEffect(() => {
@@ -52,14 +53,22 @@ const MoviesCard = ({ movie, onSaveMovie, onDeleteMovie }) => {
   }
 
   return (
-    <li className="movie-card" >
+    <li className="movie-card" onMouseEnter={() => setIsMouseOver(true)} onMouseLeave={() => setIsMouseOver(false)}>
       {path === '/movies' ? <Button
-        className={`movie-card__save-button ${ isMovieOwner ? "movie-card__save-button_saved" : "" }`}
-        buttonText={`${ isMovieOwner ? "" : "Сохранить" }`}
+          className={`
+            movie-card__save-button
+            ${isMouseOver || window.innerWidth < 1138 || isMovieOwner ? "movie-card__save-button_visible" : ""}
+            ${isMovieOwner ? "movie-card__save-button_saved" : ""}
+          `}
+          buttonText={`${isMovieOwner ? "" : "Сохранить"}`}
         buttonType="button"
         handleClick={ handleClick }
       /> : <Button
-        className={"movie-card__save-button movie-card__save-button_delete"}
+        className={`
+          movie-card__save-button
+          movie-card__save-button_delete
+          ${isMouseOver || window.innerWidth < 1138 || isMovieOwner ? "movie-card__save-button_visible" : ""}
+        `}
         buttonType="button"
         handleClick={ handleClick }
       />}

@@ -19,7 +19,8 @@ const SavedMovies = ({ onDeleteMovie }) => {
           setFilmsList={ setMoviesList }
         />
         <MoviesCardList
-          movies={ moviesList }
+          movies={ savedMovies }
+          RenderedMovies={ moviesList }
           onDeleteMovie={ onDeleteMovie }
         />
         <MoreMovies

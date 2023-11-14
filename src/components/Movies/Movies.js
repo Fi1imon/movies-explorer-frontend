@@ -68,7 +68,8 @@ const Movies = ({ loggedIn, width, onSaveMovie, onDeleteMovie }) => {
           setFilmsList={ setMoviesList }
         />
         {isLoading ? <Preloader /> : <MoviesCardList
-          movies={ renderedFilms }
+          movies={ movies }
+          RenderedMovies={ renderedFilms }
           onSaveMovie={ onSaveMovie }
           onDeleteMovie={ onDeleteMovie }
         />}

@@ -11,14 +11,24 @@ export function useFormAndValidation() {
 
     setValues({...values, [name]: value});
     setErrors({...errors, [name]: e.target.validationMessage});
-    if(name.toLowerCase().includes('email') && e.target.validationMessage === '') {
-      if(!validate(value)) {
-        setIsValid(false);
-        setErrors({ ...errors, [name]: 'Некорректный email' });
+
+    if(Object.keys(values).some((key) => {
+      if (name.includes('Email')) {
+        return validate(value)
+      }
+      else if (key.includes('Email')) {
+        return  validate(values[key])
+      }
+    }) &&
+        e.target.closest('form').checkValidity()
+    ) {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+      if (name.includes('Email') && !validate(value)) {
+        setErrors({...errors, [name]: 'Некорректный email'});
       }
     }
-
-    setIsValid(e.target.closest('form').checkValidity());
   }
 
   const resetForm = useCallback((emptyValues = {}, emptyErrors = {}, newIsValid = false) => {

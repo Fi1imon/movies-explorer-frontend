@@ -58,7 +58,15 @@ function App() {
     setIsValid(false);
     mainApi.register({ name, email, password })
       .then(() => {
-        onLogin( { email, password, goMoviesPage, setError } );
+        mainApi.login({ email, password })
+        .then((user) => {
+          setCurrentUser(user);
+          setIsLoggedIn(true);
+          goMoviesPage();
+        })
+        .catch((err) => {
+        console.log(err);
+        })
       })
       .catch((err) => {
         if(err.includes('409')) {

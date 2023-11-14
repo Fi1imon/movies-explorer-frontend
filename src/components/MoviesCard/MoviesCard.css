@@ -26,11 +26,16 @@
   letter-spacing: 0;
   text-align: center;
   transition: opacity .2s linear;
+  display: none;
 }
 
 .movie-card__save-button:hover {
   cursor: pointer;
   opacity: .8;
+}
+
+.movie-card__save-button_visible {
+  display: block;
 }
 
 .movie-card__save-button_saved {

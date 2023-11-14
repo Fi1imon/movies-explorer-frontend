@@ -38,7 +38,6 @@ const SearchForm = ({ films, setFilmsList, getMovies }) => {
     if(path === '/movies' && films.length < 1) {
       getMovies();
     }
-    console.log(films)
 
       filterMovies({ setFilmsList, films, filterOptions, path });
   };
